@@ -1,0 +1,48 @@
+.App {
+  margin: 0px;
+  background-color: #1A2F3A;
+  font-family:sans-serif;
+  font-size: 17px;
+    
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 10;
+
+  box-shadow: 
+    2px 0 10px 0 rgba(0, 0, 0, 0.12), 
+    2px 0 15px 0 rgba(0, 0, 0, 0.9); 
+     
+ 
+}
+
+.App a {   
+  
+   text-decoration: none; 
+   display: flex;
+   justify-content: space-around;
+   padding: 40px 10px 40px 10px;
+   
+   font-weight: 300px;
+   color: #FFF;
+   
+   
+}
+
+.App a:hover {
+  background: linear-gradient(135deg, #07a7e3 0%, #32dac3 100%)
+  
+}
+
+.img-react img{
+  display: flex;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;  
+}
+
+.img-node img{
+  display: flex;
+  width: 80px; 
+  height: 40px;  
+}

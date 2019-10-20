@@ -1,0 +1,22 @@
+.contato {
+    margin: 30px; 
+    height: 740px;    
+  
+    background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); 
+
+    
+    box-shadow: 
+        2px 0 10px 0 rgba(0, 0, 0, 0.12), 
+        2px 0 15px 0 rgba(0, 0, 0, 0.9); 
+         
+  }
+
+  .user-form {
+
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 10;
+
+  }
+

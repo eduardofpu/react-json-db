@@ -1,0 +1,22 @@
+.home {
+
+  margin: 30px; 
+  height: 740px;  
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 10;
+
+  background: linear-gradient(to right, #536976, #BBD2C5); box-shadow: 
+      2px 0 10px 0 rgba(0, 0, 0, 0.12), 
+      2px 0 15px 0 rgba(0, 0, 0, 0.9);  
+       
+}
+
+.h1 i {
+    display: flex;
+    color: lightgrey;
+    font-size: 40px;
+    padding:200px;     
+}
