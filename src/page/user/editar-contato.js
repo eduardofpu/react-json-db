@@ -43,7 +43,7 @@ deleteContato(codigo, event) {
     } else {
         txt = "Cancel!";
     }
-    this.buscarContato();
+    //this.buscarContato();
 }
 
 getDadosParaEditar(json,event){    
@@ -71,6 +71,7 @@ mostrarFormEdit() {
                         atualizarTabelaContato = { this.buscarContato() }>
                </FormEdit>;
     }
+    return  this.buscarContato();
 }
 
 
