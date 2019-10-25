@@ -1,95 +1,139 @@
 import React, { Component } from 'react'
-import {deleteActionId } from '../../actions/user/UserAction';
 import FormEdit from './form/FormEdit';
 import './contato.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import axios from 'axios'
+import Pagination from '../../component/Pagination';
+
+const baseUrl = 'http://localhost:3001/users' 
 
 class UserEdit extends Component {
-  
+    
 constructor(){
     super()    
-    this.state = { lista:[], data: '' };  
+    this.state = { 
+        lista:[],
+         data: '' ,
+         paginaAtual:[1],         
+         porPagina:[4]         
+        };       
+}   
+
+getTable(){
  
-}    
+    axios(baseUrl).then(resp => {
+        this.setState({ lista: resp.data })
+    })   
+}
 
-buscarContato(){   
-        
-    let url = "http://localhost:3001/users"
-    fetch(url,{
-        method:"GET",
-        headers:{
-            'Content-type':'application/json'
-        }
-    }).then((response) => response.json())
-    .then(json => {
-        this.setState({ 
-            lista: json
-            })        
-           
-        })
-}  
+componentWillMount(){
+    this.getTable()
+}
 
-
-deleteContato(codigo, event) {
+deleteContato(user, event) {
     event.preventDefault();
+
     var txt;
     var r = confirm("Deseja Excluir?");
     if (r === true) {
         txt = "OK!";
-        deleteActionId(codigo)       
-        alert ('Excluido com sucesso!!')       
+        // deleteActionId(codigo)  
+        this.remove(user)     
+        // alert ('Excluido com sucesso!!')       
         
     } else {
         txt = "Cancel!";
-    }
-    //this.buscarContato();
+    }  
 }
 
-getDadosParaEditar(json,event){    
+remove(user){
+    axios.delete(`${baseUrl}/${user.id}`).then(resp => {
+        const list = this.getUpdateList(user, false)        
+        this.setState({lista: list })
+        console.log("Nova lista: ",list)
+    })
+}
+
+
+getUpdateList(user, add = true){
+    //Remove o usuario da lista  e coloca o novo usuario na primeira posição
+    const list = this.state.lista.filter(u=> u.id !== user.id)
+    // coloca o primeiro elemento no array
+    if(add) list.unshift(user)
+      return list
+}
+
+getDadosParaEditar(user,event){    
     event.preventDefault();
    
-    let dados = json;
-    
-    
+    let dados = user;
     
     this.setState({ 
         data: dados
         })       
      
-    console.log("data",dados )    
-    
+    console.log("data",dados ) 
 }
 
+salvar(data) {  
+     let id = this.state.data.id
+     axios.put(`${baseUrl}/${id}`, data)
+    .then(resp => {
+      const list = this.getUpdateList(resp.data)
+      this.setState({lista:list})
+    })
+ }
+
 mostrarFormEdit() {
+
+    const save = data => this.salvar(data);
     
     if (this.state.data.id != null) {
         return <FormEdit
                         id={this.state.data.id}
                         nome={this.state.data.nome}
                         email={this.state.data.email}
-                        atualizarTabelaContato = { this.buscarContato() }>
-               </FormEdit>;
-    }
-    return  this.buscarContato();
+                        updateAction ={save}
+                       
+                        >
+               </FormEdit>; 
+    }      
 }
 
-
-componentDidMount() {  
-     this.buscarContato();
- }
+pagina(pageNumber) {  
+   this.setState({
+    paginaAtual: pageNumber
+   })
+    console.log("Page: ",pageNumber)
+}
 
 render() {
     
-    const list = this.state.lista;    
+    const list = this.state.lista;  
+    
+    const ultimoIndex = this.state.paginaAtual * this.state.porPagina;
+    const primeiroIndex = ultimoIndex - this.state.porPagina;
+    const contatosAtuais = list.slice(primeiroIndex, ultimoIndex);
+    
+
+    //Get page
+    const paginate = pageNumber => this.pagina(pageNumber);
    
         
 return (       
     
     <div  className="contato">
+        <h6 className="text-primary mb-3">Component props e state</h6>
        
          {this.mostrarFormEdit()}
-        <br></br><br></br>
+                <br></br><br></br>
+
+        <Pagination 
+        postsPerPage={this.state.porPagina} 
+        totalPosts={list.length} 
+        paginate={ paginate }
+        />
                 
         <table className="table table-striped">
             <thead>
@@ -101,11 +145,10 @@ return (
                 <th scope="col">Excluir</th>
                 </tr>
                 </thead>
-                <tbody>
-                    
+                <tbody>                    
 
                     {
-                        list.map((item) =>{
+                        contatosAtuais.map((item) =>{
                         return (
 
                                 <tr key={item.id}> 
@@ -114,7 +157,7 @@ return (
                                     <td> {item.nome} </td>
                                     <td> {item.email} </td>
                                     <td><button className="btn btn-warning" onClick={this.getDadosParaEditar.bind(this,item)}><i className="fa fa-pencil"></i></button></td>
-                                    <td><button className="btn btn-danger ml-2" onClick={this.deleteContato.bind(this,item.id)}> <i className="fa fa-trash"></i>  </button></td> 
+                                    <td><button className="btn btn-danger ml-2" onClick={this.deleteContato.bind(this,item)}> <i className="fa fa-trash"></i>  </button></td> 
                                     
                                 </tr>
                                 );                            
@@ -122,10 +165,13 @@ return (
                     }
 
                 </tbody>
-        </table>
-    </div>     
+        </table>        
+    </div>
+
 );
+       
 }
+
 }
 
 export default UserEdit;

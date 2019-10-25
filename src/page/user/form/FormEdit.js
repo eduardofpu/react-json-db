@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import React from 'react'
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { updateAction } from '../../../actions/user/UserAction';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const required = value => value ? undefined : '*'
@@ -27,10 +26,8 @@ const aol = value =>
 const UserFormFunc = props => {
 
     
-    var id = props.id
-    console.log("teste",id)  
-
-
+var id = props.id
+   
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div>
   <label>{label}</label>
@@ -46,12 +43,12 @@ const verifyId = () =>{
     return true;
   }
 
-}  
+}
     
-const{handleSubmit, pristine, reset, submitting } = props
+const{handleSubmit, pristine, reset, submitting,updateAction } = props
 
-    const submit = (data, updateAction) =>{
-      
+    const submit = (data) =>{
+            
       if(!verifyId()){
       
         confirmAlert({
@@ -66,7 +63,7 @@ const{handleSubmit, pristine, reset, submitting } = props
         });   
       
 
-      }else{
+      } else {
 
         confirmAlert({
           title: 'Editar contato',
@@ -75,23 +72,24 @@ const{handleSubmit, pristine, reset, submitting } = props
             {
               label: 'OK',
                //o data e o payload  nome e email
-              onClick: () => updateAction(id,data)
+              onClick: () => updateAction(data) 
                                  
             },
             {
               label: 'Cancel'
             }
-          ]
+          ]          
         });
-      }
+      }    
+     
     }
+
 
     // o props captura no id, nome e o email passdo atraves de um estado no userEdit
     return (       
         
         <div>    
-            <form onSubmit={handleSubmit((fields)=>submit(fields,updateAction))}>
-
+            <form onSubmit={handleSubmit((fields)=>submit(fields))}>
              
                 <label>                  
                 id:{id}
@@ -149,4 +147,4 @@ const mapStateToProps = state =>({
     
 })
 
-export default  connect(mapStateToProps,{updateAction})(FormEdit)       
+export default  connect(mapStateToProps)(FormEdit)       

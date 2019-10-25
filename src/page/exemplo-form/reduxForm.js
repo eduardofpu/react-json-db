@@ -41,7 +41,7 @@
 
     const ReduxForm = ({handleSubmit,valid}) => (
         <div className="contato">
-            <h2>Redux Form</h2>
+             <h3 className="text-primary mb-3">Validação com Redux</h3>    
             <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <Field name="cutomer-id"  

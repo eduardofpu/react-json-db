@@ -14,8 +14,11 @@ class App extends Component {
         <div className="App">
         <div className="img-node"> <img src= {imgNode} alt="imgNode"/></div><div></div>
               <Link to="/">Home</Link> 
-              <Link to="/user">Contato</Link> 
-              <Link to="/userEdit">Aterar</Link> 
+              <Link to="/linha">Linha</Link>
+              <Link to="/table">save</Link> 
+              <Link to="/crudTable">update</Link> 
+              <Link to="/user">submit</Link> 
+              <Link to="/userEdit">Edit</Link>               
               <Link to="/reduxForm">Redux</Link>      
               <Link to="/form">State</Link><div></div>
              

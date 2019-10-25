@@ -1,7 +1,21 @@
+import  React from 'react'
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:3001/users' 
+
+export const getContato = () => {
+
+    axios(baseUrl).then(json => {
+              
+       console.log("getContato: ",json.data)
+                  
+    })
+}
+ 
 export const submitUserAction = (data) => {  
     // event.preventDefault ();  
     let url = "http://localhost:3001/users"
-    fetch(url,{
+    fetch(baseUrl,{
         method:"POST",
         headers:{
             'Content-type':'application/json'
@@ -10,14 +24,14 @@ export const submitUserAction = (data) => {
        
     }) .then(Response => Response.json())
     .then(json => {
-        console.log(json)        
-        alert ('Salvo com sucesso!!') 
+        console.log(json) 
+        
      })
 }
 
 export const updateAction = (id,data) => {    
-    let url = "http://localhost:3001/users/"+id
-    fetch(url,{
+   
+    fetch(`${baseUrl}/${id}`,{
         method:"PUT",
         headers:{
             'Content-type':'application/json'
@@ -26,15 +40,7 @@ export const updateAction = (id,data) => {
        
     }) .then(Response => Response.json())
     .then(json => {
-        console.log(json)        
+        console.log(json)  
+            
     })
-}
-
-export const deleteActionId = (id) => {    
-    let url = "http://localhost:3001/users/"+id
-    fetch(url,{
-        method:"DELETE"
-              
-    }) .then(console.log("204 No Content"))
-    
 }

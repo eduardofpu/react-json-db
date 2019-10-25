@@ -1,7 +1,7 @@
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import React from 'react'
-import { submitUserAction } from "../../../actions/user/UserAction"
+
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -40,10 +40,10 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 )    
 
   
-const{handleSubmit, pristine, reset, submitting } = props
+const{handleSubmit, pristine, reset, submitting, submitUserAction } = props
   
    
-const submit = (data,submitUserAction) =>{
+const submit = (data) =>{
 
   //Utiliza a importação confirmAlert do react-confirm-alert.css
   confirmAlert({
@@ -60,17 +60,15 @@ const submit = (data,submitUserAction) =>{
    }
   ]
  });
-
- //para atualizar a tabela sem o refresh da pagina
- props.atualizarTabelaContato
-
+ 
 }
+
 
     return (
       
       <div>
         
-         <form  onSubmit={handleSubmit((fields)=>submit(fields,submitUserAction))}>
+         <form  onSubmit={handleSubmit((fields)=>submit(fields))}>
             
          <div className="form-group">
                 <Field             
@@ -111,5 +109,5 @@ const mapStateToProps = state =>({
   
 })
 
-export default connect(mapStateToProps, {submitUserAction})(UserForm)
+export default connect(mapStateToProps)(UserForm)
 

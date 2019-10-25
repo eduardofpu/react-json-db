@@ -3,6 +3,9 @@ import User from "./page/user/contato";
 import UserEdit from "./page/user/editar-contato";
 import reduxForm from "./page/exemplo-form/reduxForm";
 import Form from "./page/exemplo-form/form";
+import Linha from './page/linha/Linha'
+import TableView from './page/linha/TableView'
+import CrudTableView from './page/linha/CrudTableView'
 
 const routesConfig = [
     {
@@ -30,6 +33,26 @@ const routesConfig = [
         component:Form,
         exact:true
     }   
+    , 
+    {
+        path:"/linha",
+        component:Linha,
+        exact:true
+    }   
+    , 
+    {
+        path:"/table",
+        component:TableView,
+        exact:true
+    }   
+
+    , 
+    {
+        path:"/crudTable",
+        component:CrudTableView,
+        exact:true
+    }   
+    
 ]
 
 export default routesConfig

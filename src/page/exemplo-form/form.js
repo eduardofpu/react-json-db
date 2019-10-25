@@ -84,6 +84,8 @@ render() {
 return (       
     
     <div className="contato">
+
+     <h3 className="text-primary mb-3">Validação com state e props</h3>      
        
         <form onSubmit={this.submeter}>
         <div className="form-group">
