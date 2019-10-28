@@ -2,19 +2,21 @@
 import React from 'react'
 import UserForm from '../page/user/form/UserForm';
 
-const Table = ({posts, loading, submitUserAction,lista}) => {
+import LoadingBlack from '../component/loading/LoadingBlack'
 
+const Table = ({posts, loading, submitUserAction}) => {
+   
+    //Se o servidor estiver parado o loading sera carregado
     if(loading){
-      return <h2>Loading...</h2>
-    }
-
-
+       
+            return <LoadingBlack type="spokes" color="black"></LoadingBlack>
+    } 
+    
     return <ul className="list-group mb-4">
-             
 
              <div> 
               
-                <UserForm submitUserAction = {submitUserAction}></UserForm><br></br><br></br>
+                <UserForm submitUserAction={submitUserAction}></UserForm><br></br><br></br>
 
               </div>
 
@@ -45,7 +47,6 @@ const Table = ({posts, loading, submitUserAction,lista}) => {
 
                </tbody>
        </table>
-       
       
     </ul>
 };

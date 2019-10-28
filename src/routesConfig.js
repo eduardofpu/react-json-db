@@ -7,6 +7,7 @@ import Linha from './page/linha/Linha'
 import TableView from './page/linha/TableView'
 import CrudTableView from './page/linha/CrudTableView'
 
+
 const routesConfig = [
     {
         path:"/",

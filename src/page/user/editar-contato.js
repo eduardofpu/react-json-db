@@ -6,6 +6,12 @@ import 'font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
 import Pagination from '../../component/Pagination';
 
+
+
+import LoadingBlack from '../../component/loading/LoadingBlack'
+import State from '../../component/msg/State';
+
+
 const baseUrl = 'http://localhost:3001/users' 
 
 class UserEdit extends Component {
@@ -13,7 +19,9 @@ class UserEdit extends Component {
 constructor(){
     super()    
     this.state = { 
-        lista:[],
+         loading:false,
+         loadingEnter:false,
+         lista:[],
          data: '' ,
          paginaAtual:[1],         
          porPagina:[4]         
@@ -23,7 +31,11 @@ constructor(){
 getTable(){
  
     axios(baseUrl).then(resp => {
-        this.setState({ lista: resp.data })
+        this.setState({ 
+            loading:true,
+            loadingEnter:true,
+            lista: resp.data
+         })
     })   
 }
 
@@ -108,6 +120,10 @@ pagina(pageNumber) {
     console.log("Page: ",pageNumber)
 }
 
+carregandoPagina(){
+    
+}
+
 render() {
     
     const list = this.state.lista;  
@@ -119,12 +135,34 @@ render() {
 
     //Get page
     const paginate = pageNumber => this.pagina(pageNumber);
-   
+
+    let carregando = this.state.loading;
+    let entrando = this.state.loadingEnter;
+
+    //Se o servidor estiver parado o loading sera carregado
+    if(!carregando){
+        return <div>
+                <br></br>
+                <LoadingBlack type="spokes" color="black"></LoadingBlack> 
+            </div>  
+
+    //Se o servidor estiver ok o loading sera carregado durante alguns segundos e apresentara os dados
+    }else if(entrando){
+    setTimeout(()=>{
+            this.setState({loadingEnter:false});
+    },500);
+
+        return <div>
+                <br></br>
+                <LoadingBlack type="spokes" color="black"></LoadingBlack>  
+            </div> 
+    }
+       
         
 return (       
     
     <div  className="contato">
-        <h6 className="text-primary mb-3">Component props e state</h6>
+        <h5 className="text-primary mb-3"><State name="Clique aqui para saber mais..."></State></h5>    
        
          {this.mostrarFormEdit()}
                 <br></br><br></br>

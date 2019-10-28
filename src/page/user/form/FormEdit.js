@@ -4,6 +4,7 @@ import React from 'react'
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from '../../../component/button/Button';
 
 const required = value => value ? undefined : '*'
 
@@ -133,8 +134,8 @@ const{handleSubmit, pristine, reset, submitting,updateAction } = props
                 </div>
                               
                 <button disabled={pristine || submitting} type="submit"  className="btn btn-primary">Salvar</button>
-                <button type="button"  className="btn btn-outline-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>   
-              
+                {/* <button type="button"  className="btn btn-outline-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>    */}
+                <Button nameButton="Clear Values" desabilitar={pristine || submitting} limpar={reset}></Button>     
             </form>
         </div>
     );  

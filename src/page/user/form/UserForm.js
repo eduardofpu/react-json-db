@@ -5,6 +5,7 @@ import React from 'react'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from '../../../component/button/Button';
 
 //Métodos de validação    
 const required = value => value ? undefined : '*'
@@ -93,7 +94,9 @@ const submit = (data) =>{
             </div>   
 
              <button disabled={submitting} type="submit" className="btn btn-primary">Salvar</button>
-             <button type="button" className="btn btn-outline-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>      
+             {/* <button type="button" className="btn btn-outline-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>  */}
+
+             <Button nameButton="Clear Values" desabilitar={pristine || submitting} limpar={reset}></Button>     
                     
          </form>
         

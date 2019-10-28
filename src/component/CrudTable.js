@@ -5,6 +5,8 @@ import FormEdit from '../page/user/form/FormEdit'
 
 import axios from 'axios'
 
+import LoadingBlack from '../component/loading/LoadingBlack'
+
 
 
 const baseUrl = 'http://localhost:3001/users' 
@@ -12,10 +14,10 @@ const baseUrl = 'http://localhost:3001/users'
 
 const CrudTable = ({posts, loading, setPosts, lista}) => {    
     const [dados, setDados] = useState([]);
-    const [novaLista, setLista] = useState([]);
-                 
+
+                     
     if(loading){
-      return <h2>Loading...</h2>
+      return <LoadingBlack type="spokes" color="black"></LoadingBlack>
     }
 
 

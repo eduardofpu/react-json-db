@@ -1,14 +1,11 @@
-import  React from 'react'
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/users' 
 
 export const getContato = () => {
 
-    axios(baseUrl).then(json => {
-              
-       console.log("getContato: ",json.data)
-                  
+    axios(baseUrl).then(json => {              
+       console.log("getContato: ",json.data)                  
     })
 }
  

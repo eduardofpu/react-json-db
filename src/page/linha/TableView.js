@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Table from '../../component/Table';
 import Pagination from '../../component/Pagination';
+import Hook from '../../component/msg/Hook';
 
 const baseUrl = 'http://localhost:3001/users' 
 
 const TableView = () => {
 
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);        
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(4);
 
@@ -18,7 +19,7 @@ const TableView = () => {
             setLoading(true);
             const res = await axios.get(baseUrl)
             setPosts(res.data);
-            setLoading(false);
+            setLoading(false); 
         }
 
         fetchPosts();
@@ -61,8 +62,8 @@ const TableView = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="text-primary mb-3">Usando o State do Hook</h1>
-            <Table posts ={currentPosts} loading ={loading} submitUserAction ={save}/>
+             <h5 className="text-primary mb-3"> <Hook name="Clique aqui para saber mais..."></Hook></h5>
+            <Table posts={currentPosts} loading={loading} setLoading={setLoading} submitUserAction={save}/>
             <Pagination 
                        postsPerPage={postsPerPage} 
                        totalPosts={posts.length} 

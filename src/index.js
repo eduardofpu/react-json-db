@@ -8,10 +8,14 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './redux/reducers'
 import ReduxThunk from 'redux-thunk'
 
+
 ReactDOM.render(
   //configurando a a plicação com redux
   <Provider store={createStore(rootReducer, {}, applyMiddleware(ReduxThunk))}>
+      
     <Router>
       <App />
     </Router> 
+    
   </Provider>, document.getElementById('root'));
+  
