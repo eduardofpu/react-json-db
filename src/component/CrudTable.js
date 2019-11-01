@@ -12,12 +12,19 @@ import LoadingBlack from '../component/loading/LoadingBlack'
 const baseUrl = 'http://localhost:3001/users' 
 
 
-const CrudTable = ({posts, loading, setPosts, lista}) => {    
+const CrudTable = ({posts, loading, loadingEnter, setLoadingEnter, setPosts, lista}) => {    
     const [dados, setDados] = useState([]);
 
                      
-    if(loading){
+    if(!loading){
       return <LoadingBlack type="spokes" color="black"></LoadingBlack>
+    }else if(loadingEnter){
+        setTimeout(()=>{
+            setLoadingEnter(false);
+    },1000);
+
+        return <LoadingBlack type="spokes" color="black"></LoadingBlack>
+
     }
 
 

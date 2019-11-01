@@ -1,4 +1,3 @@
-// import React, { Component} from 'react'
 import React,{ Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 import './App.css'
@@ -17,6 +16,9 @@ class App extends Component {
         <div className="App">
         <div className="img-node"> <img src={imgNode} alt="imgNode"/></div><div></div>
               <Link to="/">Home</Link> 
+              <Link to="/infinitSimple">Scroll</Link>
+              <Link to="/infinitJson">ScrollJson</Link>
+              <Link to="/infinitContato">ScrollContato</Link>
               <Link to="/linha">Linha</Link>
               <Link to="/table">save</Link> 
               <Link to="/crudTable">update</Link> 

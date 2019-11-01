@@ -6,6 +6,9 @@ import Form from "./page/exemplo-form/form";
 import Linha from './page/linha/Linha'
 import TableView from './page/linha/TableView'
 import CrudTableView from './page/linha/CrudTableView'
+import InfinitSimple from "./page/infinit-scroll/InfinitSimple";
+import ScrollContato from "./page/infinit-scroll/ScrollContato";
+import ScrollJson from "./page/infinit-scroll/ScrollJson";
 
 
 const routesConfig = [
@@ -52,7 +55,24 @@ const routesConfig = [
         path:"/crudTable",
         component:CrudTableView,
         exact:true
-    }   
+    }  
+    , 
+    {
+        path:"/infinitSimple",
+        component:InfinitSimple,
+        exact:true
+    }  
+    , 
+    {
+        path:"/infinitJson",
+        component:ScrollJson,
+        exact:true
+    },  
+    {
+        path:"/infinitContato",
+        component:ScrollContato,
+        exact:true
+    }  
     
 ]
 

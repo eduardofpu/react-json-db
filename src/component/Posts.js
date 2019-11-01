@@ -1,10 +1,17 @@
 
 import React from 'react'
 
-const Posts = ({posts, loading}) => {
+const Posts = ({posts, loading, loadingEnter, setLoadingEnter}) => {
 
-    if(loading){
+    if(!loading){
       return <h2>Loading...</h2>
+    }else if(loadingEnter){
+        setTimeout(()=>{
+            setLoadingEnter(false);
+    },1000);
+
+        return <h2>Loading...</h2>
+
     }
 
 

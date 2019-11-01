@@ -11,16 +11,18 @@ const baseUrl = 'http://localhost:3001/users'
 const CrudTableView = () => {
 
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);    
+    const [loading, setLoading] = useState(false);  
+    const [loadingEnter, setLoadingEnter] = useState(false);  
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(4);
 
     useEffect(() =>{
         const fetchPosts = async () => {
-            setLoading(true);            
+            // setLoading(true);            
             const res = await axios.get(baseUrl)
             setPosts(res.data);
-            setLoading(false);           
+            setLoading(true); 
+            setLoadingEnter(true);          
         }
 
         fetchPosts();
@@ -37,15 +39,24 @@ const CrudTableView = () => {
     //Get page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    return (
-        <div className="container mt-5">
-            <h5 className="text-primary mb-3"> <Hook name="Clique aqui para saber mais..."></Hook></h5>
-            <CrudTable posts={currentPosts} loading={loading} setPosts={setPosts} lista={posts}/>
-            <Pagination 
+    const mostrarPagination = () => {
+        if(!loading){
+            return 
+
+        }else if(!loadingEnter){
+            return <Pagination 
                        postsPerPage={postsPerPage} 
                        totalPosts={posts.length} 
                        paginate={paginate}
             />
+        }
+    }
+
+    return (
+        <div className="container mt-5">
+            <h5 className="text-primary mb-3"> <Hook name="Clique aqui para saber mais..."></Hook></h5>
+            <CrudTable posts={currentPosts} loading={loading} loadingEnter ={loadingEnter} setLoadingEnter={setLoadingEnter} setPosts={setPosts} lista={posts}/>
+           {mostrarPagination()}
         </div>
     );
 };

@@ -4,13 +4,21 @@ import UserForm from '../page/user/form/UserForm';
 
 import LoadingBlack from '../component/loading/LoadingBlack'
 
-const Table = ({posts, loading, submitUserAction}) => {
+const Table = ({posts, loading, loadingEnter, setLoadingEnter, submitUserAction}) => {
    
     //Se o servidor estiver parado o loading sera carregado
-    if(loading){
+    if(!loading){
        
             return <LoadingBlack type="spokes" color="black"></LoadingBlack>
-    } 
+    }else if(loadingEnter){
+        setTimeout(()=>{
+            setLoadingEnter(false);
+    },1000);
+
+        return <LoadingBlack type="spokes" color="black"></LoadingBlack>
+
+    }
+ 
     
     return <ul className="list-group mb-4">
 
