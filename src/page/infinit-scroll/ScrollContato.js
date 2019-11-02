@@ -40,8 +40,8 @@ fetchData = () => {
         pageNumber: this.state.pageNumber + 1
 
         });
-      }, 3000)
-                  
+        
+      }, 3000) 
                   
     );            
  };

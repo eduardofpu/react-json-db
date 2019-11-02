@@ -40,6 +40,7 @@ fetchData = () => {
         pageNumber: this.state.pageNumber + 1
 
         });
+        // console.log(this.state.breweries);
       }, 3000)
       
     );

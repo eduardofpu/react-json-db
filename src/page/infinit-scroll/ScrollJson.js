@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import axios from 'axios'
+import LoadingScroll from '../../component/loading/LoadingScroll';
 
 const baseUrl = 'http://localhost:3001/users' 
 
@@ -20,24 +21,41 @@ class ScrollJson extends Component {
         super()
         this.state = {
             lista:[],
-            pageNumber:0,
+            pageNumber:1,
             porPagina:15,
             hasMore: true
       }
+      
   }
 
 fetchData = () => {
 
-    axios.get(baseUrl+`?page=${this.state.pageNumber}`)
-    .then(res =>
+    axios.get(baseUrl+`?_page=${this.state.pageNumber}&_limit=${this.state.porPagina}`)
+    .then(res =>       
+      
+      setTimeout(() => {
+        this.setState({
+            //updating data
+        lista: [...this.state.lista, ...res.data],
+        //updating page numbers
+        pageNumber: this.state.pageNumber + 1
+
+        });
         
-            this.setState({  
-                lista: [...this.state.lista, ...res.data],
-                pageNumber: this.state.pageNumber + 1 
-                
-            })    
-    );            
+      }, 3000) 
+               
+    ); 
+    console.log(this.state.lista);          
   };
+
+  
+loading(){
+  if(this.state.lista!=null){
+   
+    return <LoadingScroll type="bubbles" color="black"></LoadingScroll>
+  }
+}
+
 componentWillMount(){
     this.fetchData();     
 }
@@ -48,11 +66,6 @@ componentWillMount(){
         
     const list = this.state.lista;   
     
-        
-    const ultimoIndex = this.state.pageNumber * this.state.porPagina;
-    const primeiroIndex = ultimoIndex - this.state.porPagina;
-    const contatosAtuais = list.slice(primeiroIndex, ultimoIndex);  
-
     return (
       <div>
         <h4>demo: react-infinite-scroll-component com json.db</h4>
@@ -61,10 +74,10 @@ componentWillMount(){
           dataLength={list.length} //This is important field to render the next data
           next={this.fetchData}
           hasMore={this.state.hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={this.loading()}
         >
 
-          {contatosAtuais.map(item => (
+          {list.map((item) => (
             <div style={style} key={item.id}>
                    {item.id} - {item.nome}
             </div>
