@@ -3,13 +3,12 @@ import React, {useState} from 'react'
 
 import FormEdit from '../page/user/form/FormEdit'
 
-import axios from 'axios'
-
 import LoadingBlack from '../component/loading/LoadingBlack'
+import apiDb from '../page/apiDb';
 
 
 
-const baseUrl = 'http://localhost:3001/users' 
+const baseUrl = '/users' 
 
 
 const CrudTable = ({posts, loading, loadingEnter, setLoadingEnter, setPosts, lista}) => {    
@@ -37,7 +36,7 @@ const salvar = (data) =>{
 
     let id = dados.id
     console.log("Id: ",id)
-    axios.put(`${baseUrl}/${id}`, data)
+    apiDb.put(`${baseUrl}/${id}`, data)
     .then(resp => {
         const list = getUpdateList(resp.data)    
         setPosts(list)
@@ -62,7 +61,7 @@ const deleteContato = (data) => {
 
 const remove = (data) => {
 
-    axios.delete(`${baseUrl}/${data.id}`).then(resp => {
+    apiDb.delete(`${baseUrl}/${data.id}`).then(resp => {
         console.log("No content 204",resp.data)
        
         const list = getUpdateList(data, false)        

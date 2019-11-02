@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
-
-import axios from 'axios'
 import LoadingScroll from '../../component/loading/LoadingScroll';
-
-const baseUrl = 'http://localhost:3001/users' 
-
- 
+import apiDb from '../apiDb';
 
 const style = {
     height: 100,
@@ -30,7 +25,7 @@ class ScrollJson extends Component {
 
 fetchData = () => {
 
-    axios.get(baseUrl+`?_page=${this.state.pageNumber}&_limit=${this.state.porPagina}`)
+   apiDb.get(`/users?_page=${this.state.pageNumber}&_limit=${this.state.porPagina}`)
     .then(res =>       
       
       setTimeout(() => {

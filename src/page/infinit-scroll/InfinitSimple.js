@@ -26,8 +26,7 @@ class InfinitSimple extends Component {
 
 fetchData = () => {
   axios
-  .get(
-      `https://api.openbrewerydb.org/breweries?page=${
+  .get(`https://api.openbrewerydb.org/breweries?page=${
         this.state.pageNumber
       }&per_page=${this.state.items}`
     )
