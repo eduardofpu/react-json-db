@@ -17,6 +17,7 @@ class App extends Component {
         <div className="img-node"> <img src={imgNode} alt="imgNode"/></div><div></div>
               <Link to="/">Home</Link> 
               <Link to="/infinitSimple">Scroll</Link>
+              <Link to="/botao">Botao</Link>
               <Link to="/infinitJson">ScrollJson</Link>
               <Link to="/infinitContato">ScrollContato</Link>
               <Link to="/linha">Linha</Link>

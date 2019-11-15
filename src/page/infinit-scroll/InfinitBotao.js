@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import InfiniteScroll from "react-infinite-scroll-component";
-
 import axios from 'axios'
 import LoadingScroll from '../../component/loading/LoadingScroll';
+import ButtonScroll from '../../component/button/ButtonScroll';
 
 const style = {
     height: 100,
@@ -11,14 +10,14 @@ const style = {
     padding: 8
   };
 
-class InfinitSimple extends Component {
+class InfinitBotao extends Component {
 
     constructor(){
         super()
         this.state = {
             breweries: [],
             pageNumber: 1,
-            items: 15,
+            items: 1,
             hasMore: true
       }
   }
@@ -41,20 +40,14 @@ fetchData = () => {
 
         });
         // console.log(this.state.breweries);
-      }, 3000)
+      }, 1000)  
       
     );
+    
 };
 
-
-loading(){
-  if(this.state.breweries!=null){
-    return <h4> <LoadingScroll type="bubbles" color="black"></LoadingScroll>  </h4>
-  }
-}
-
 componentWillMount(){
-    this.fetchData();
+    this.fetchData();   
 }
 
   render() {
@@ -64,25 +57,21 @@ componentWillMount(){
       <div>
         <h4>demo: react-infinite-scroll-component com api-breweries</h4>
         <hr />
-        <InfiniteScroll
-          dataLength={this.state.breweries.length} //This is important field to render the next data
-          next={this.fetchData}
-          hasMore={this.state.hasMore}
-          loader={this.loading()}
-        >
-
+        
           {this.state.breweries.map(item => (
             <div style={style} key={item.id}>
                    {item.id} - {item.name}
             </div>
           ))}
-          {/* criar botao, onClick={this.fetchData} chama a API */}
-
-        </InfiniteScroll>
-      </div>
+          <hr></hr>
+                <center>         
+                {/* <button className="btn btn-outline-secondary"  onClick={this.fetchData}>ABRIR</button> */}
+                <ButtonScroll nameButton="Próxima linha" proximo={this.fetchData}></ButtonScroll>                
+                </center>  
+                <hr></hr>        
+                    
+                </div>
     );
   }
 }
-export default InfinitSimple;
-
-// lodash
+export default InfinitBotao;

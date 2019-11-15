@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Table from '../../component/Table';
 import Pagination from '../../component/Pagination';
 import Hook from '../../component/msg/Hook';
-import apiDb from '../apiDb';
 
-const baseUrl = '/users' 
+const baseUrl = 'http://localhost:3001/users' 
 
 const TableView = () => {
 
@@ -18,7 +18,7 @@ const TableView = () => {
     useEffect(() =>{
         const fetchPosts = async () => {
             // setLoading(true);
-            const res = await apiDb.get(baseUrl)
+            const res = await axios.get(baseUrl)
             setPosts(res.data);
             setLoading(true); 
             setLoadingEnter(true);
@@ -30,7 +30,7 @@ const TableView = () => {
 
     const salvar = (data) =>{  
     
-        apiDb.post(baseUrl, data)
+        axios.post(baseUrl, data)
        .then(resp => {
          const list = getUpdateList(resp.data)
         //  this.setState({lista:list})

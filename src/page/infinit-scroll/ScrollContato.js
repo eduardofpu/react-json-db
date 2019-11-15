@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import InfiniteScroll from "react-infinite-scroll-component";
+
+import axios from 'axios'
 import LoadingScroll from '../../component/loading/LoadingScroll';
-import apiContato from '../apiContato';
 
 
 //Utilizando a api contato
-const baseUrl = '/buscarcontato' 
+const baseUrl = 'http://localhost:8080/buscarcontato' 
 
 const style = {
     height: 100,
@@ -28,7 +29,7 @@ class ScrollContato extends Component {
 
 fetchData = () => {
 
-  apiContato.get(baseUrl+`?page=${this.state.pageNumber}`)
+    axios.get(baseUrl+`?page=${this.state.pageNumber}`)
     .then(res =>
 
       setTimeout(() => {

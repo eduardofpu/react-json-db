@@ -3,16 +3,16 @@ import FormEdit from './form/FormEdit';
 import './contato.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import axios from 'axios'
 import Pagination from '../../component/Pagination';
 
 
 
 import LoadingBlack from '../../component/loading/LoadingBlack'
 import State from '../../component/msg/State';
-import apiDb from '../apiDb';
 
 
-const baseUrl = '/users' 
+const baseUrl = 'http://localhost:3001/users' 
 
 class UserEdit extends Component {
     
@@ -30,7 +30,7 @@ constructor(){
 
 getTable(){
  
-    apiDb.get(baseUrl).then(resp => {
+    axios(baseUrl).then(resp => {
         this.setState({ 
             loading:true,
             loadingEnter:true,
@@ -60,7 +60,7 @@ deleteContato(user, event) {
 }
 
 remove(user){
-    apiDb.delete(`${baseUrl}/${user.id}`).then(resp => {
+    axios.delete(`${baseUrl}/${user.id}`).then(resp => {
         const list = this.getUpdateList(user, false)        
         this.setState({lista: list })
         console.log("Nova lista: ",list)
@@ -90,7 +90,7 @@ getDadosParaEditar(user,event){
 
 salvar(data) {  
      let id = this.state.data.id
-     apiDb.put(`${baseUrl}/${id}`, data)
+     axios.put(`${baseUrl}/${id}`, data)
     .then(resp => {
       const list = this.getUpdateList(resp.data)
       this.setState({lista:list})

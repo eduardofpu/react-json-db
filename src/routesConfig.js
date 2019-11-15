@@ -9,6 +9,7 @@ import CrudTableView from './page/linha/CrudTableView'
 import InfinitSimple from "./page/infinit-scroll/InfinitSimple";
 import ScrollContato from "./page/infinit-scroll/ScrollContato";
 import ScrollJson from "./page/infinit-scroll/ScrollJson";
+import InfinitBotao from "./page/infinit-scroll/InfinitBotao";
 
 
 const routesConfig = [
@@ -72,7 +73,12 @@ const routesConfig = [
         path:"/infinitContato",
         component:ScrollContato,
         exact:true
-    }  
+    } ,
+    {
+        path:"/botao",
+        component:InfinitBotao,
+        exact:true
+    } 
     
 ]
 
