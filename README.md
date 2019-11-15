@@ -22,4 +22,17 @@ Usando Component state e props
 Validações com Redux 
 Validações com state e props
 
+Config no Heroku
+
+1- Settings
+
+Reveal Config Vars
+coloque as variaveis
+
+2- bild no Heroku
+
+add buildpack
+Enter Buidpack URL
+colocar esse comando: mars/create-react-app
+
 ```

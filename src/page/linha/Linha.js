@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Posts from '../../component/Posts';
 import Pagination from '../../component/Pagination';
 import Hook from '../../component/msg/Hook';
+import apiDb from '../apiDb';
 
-const baseUrl = 'http://localhost:3001/users' 
+const baseUrl = '/users'
 
 const Linha = () => {
 
@@ -18,15 +18,15 @@ const Linha = () => {
     useEffect(() =>{
         const fetchPosts = async () => {
             // setLoading(true);
-            
-            const res = await axios.get(baseUrl)
+
+            const res = await apiDb.get(baseUrl)
             setPosts(res.data);
             setLoading(true);
             setLoadingEnter(true);
         }
 
         fetchPosts();
-    }, []);   
+    }, []);
     // console.log("paginaton: ",posts)
 
     //Get current posts
@@ -36,16 +36,16 @@ const Linha = () => {
 
     //Get page
     const paginate = pageNumber => setCurrentPage(pageNumber);
- 
+
     const mostrarPagination = () => {
         if(!loading){
-            return 
+            return
 
         }else if(!loadingEnter){
-            return <Pagination 
-                       postsPerPage={postsPerPage} 
-                       totalPosts={posts.length} 
-                       paginate={paginate}
+            return <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={posts.length}
+                paginate={paginate}
             />
         }
     }
@@ -53,10 +53,10 @@ const Linha = () => {
     return (
         <div className="container mt-5">
             <h5 className="text-primary mb-3"> <Hook name="Clique aqui para saber mais..."></Hook></h5>
-           
+
             <Posts posts={currentPosts} loading ={loading} loadingEnter ={loadingEnter} setLoadingEnter={setLoadingEnter} />
             {mostrarPagination()}
-            
+
         </div>
     );
 };
